@@ -53,7 +53,7 @@ QSFunction = function(BasisA, BasisB, ndimA, ndimB, positive = TRUE, ndimLSA){
     PB = PositivePoryector(PB)
   }
 
-  stateVectorMean = rep((mean(as.matrix(PA)) + mean(as.matrix(PB)))/2,ndimLSA)
+  stateVectorMean = rep((mean(as.matrix(BA)) + mean(as.matrix(BB)))/2,ndimLSA)
   stVecOptim = optim(par = stateVectorMean, fn = stateVectorEstimationQSM, A=PA, B=PB ,
                      lower = rep(-1,ncol(PA)), upper = rep(1,ncol(PA)), method = "L-BFGS-B")$par
   stateVectorOptimTest = list(zero_optimization = (t(stVecOptim) %*% PA %*% stVecOptim) - (t(stVecOptim) %*% PB %*% stVecOptim),
